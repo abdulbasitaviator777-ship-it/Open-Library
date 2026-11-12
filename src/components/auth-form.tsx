@@ -1,0 +1,9 @@
+"use client";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { createClient } from "@/lib/supabase/client";
+export function AuthForm({mode}:{mode:"login"|"signup"}) {
+ const [email,setEmail]=useState("");const [password,setPassword]=useState("");const [name,setName]=useState("");const [message,setMessage]=useState("");const [busy,setBusy]=useState(false);const router=useRouter();
+ async function submit(e:React.FormEvent){e.preventDefault();setBusy(true);setMessage("");try{const supabase=createClient();if(mode==="signup"){const {data,error}=await supabase.auth.signUp({email,password,options:{data:{full_name:name}}});if(error)throw error;if(data.session){router.push("/");router.refresh()}else setMessage("Account created. If email confirmation is enabled, confirm your email and then sign in.");}else{const {error}=await supabase.auth.signInWithPassword({email,password});if(error)throw error;router.push("/");router.refresh()}}catch(err:any){setMessage(err.message||"Authentication failed.")}finally{setBusy(false)}}
+ return <form onSubmit={submit}>{mode==="signup"&&<label className="field-label">Full name<input value={name} onChange={e=>setName(e.target.value)} required placeholder="Your name"/></label>}<label className="field-label">Email address<input type="email" value={email} onChange={e=>setEmail(e.target.value)} required placeholder="you@example.com"/></label><label className="field-label">Password<input type="password" value={password} onChange={e=>setPassword(e.target.value)} required minLength={6} placeholder="At least 6 characters"/></label><button className="button button-jade full" disabled={busy}>{busy?"Please wait…":mode==="login"?"Sign in":"Create account"}</button>{message&&<p className="form-message">{message}</p>}</form>
+}
