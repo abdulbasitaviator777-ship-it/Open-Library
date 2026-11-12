@@ -5,7 +5,7 @@ export default function Home() {
     <section className="hero">
       <div className="hero-orbit"/>
       <div className="eyebrow"><Sparkles size={13} style={{display:"inline",marginRight:7}}/> YOUR PERSONAL DIGITAL COLLECTION</div>
-      <h1>Keep what<br/>moves you <em close>close.</em></h1>
+      <h1>Keep what<br />moves you <em>close.</em></h1>
       <p>A considered space for the books you return to, the moments you capture, and the films worth remembering. Welcome to your archive.</p>
       <div className="hero-actions"><Link href="/books" className="button button-dark">Explore the archive <ArrowUpRight size={16}/></Link><Link href="/signup" className="button button-outline">Create an account</Link></div>
     </section>
