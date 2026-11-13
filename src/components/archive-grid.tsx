@@ -101,5 +101,6 @@ export async function ArchiveGrid({ kind }: { kind: MediaKind }) {
     })
   );
 
-  return <ArchiveViewers items={viewerItems} />;
+  return <ArchiveViewers items={viewerItems} kind={kind} />;
 }
+

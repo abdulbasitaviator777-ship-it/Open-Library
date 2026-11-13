@@ -34,11 +34,10 @@ type ArchiveItem = {
 };
 
 export function ArchiveViewers({
-  items,
-  kind
+  items
 }: {
   items: ArchiveItem[];
-  kind: MediaKind;
+  kind?: MediaKind;
 }) {
   const [selected, setSelected] = useState<ArchiveItem | null>(null);
 
